@@ -9,6 +9,8 @@ export default function DishRow({item}) {
     const dispatch = useDispatch();
 
     const totalItems = useSelector(state => selectCartItemsById(state,item.id));
+    // const totalItems = useSelector(state => selectCartItemsById(state,item._id));
+
 
     const handleIncrease = () => {
         dispatch(addToCart({...item}))
@@ -20,7 +22,10 @@ export default function DishRow({item}) {
   return (
     <View className="flex-row items-center bg-white p-3 rounded-3xl shadow-2xl mb-3 mx-2">
         <Image className="rounded-3xl" style={{height:100,width:100}} 
-        source={item.image}/>
+        source={item.image}
+        // source={{ uri: urlFor(image).url()}}
+
+        />
         <View className="flex flex-1 space-x-3">
             <View className="pl-3">
                 <Text className="text-xl">{item.name}</Text>

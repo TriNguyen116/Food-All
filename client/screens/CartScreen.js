@@ -6,6 +6,7 @@ import { themeColors } from '../theme';
 import * as Icon from "react-native-feather"
 import { useSelector } from 'react-redux';
 import { selectRestaurant } from '../slices/restaurantSlice';
+//dispatch
 import { selectCartItems, selectCartTotal,removeFromCart } from '../slices/cartSlice';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -19,6 +20,7 @@ export default function CartScreen() {
   const cartTotal = useSelector(selectCartTotal);
   const [groupItems, setGroupItems] = useState({});
   const deliveryFee = 2.5;
+  // View
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -75,7 +77,10 @@ export default function CartScreen() {
                   <Text className="font-bold" style={{color:themeColors.text}}>
                     {items.length} x
                   </Text>
-                  <Image className="h-14 w-14 rounded-full" source={dish.image}/>
+                  <Image className="h-14 w-14 rounded-full" 
+                  source={dish.image}
+                  // source={{uri: urlFor(items[0]?.image).url()}}
+                  />
                   <Text className="flex-1 font-bold text-gray-700">{dish.name}</Text>
                   <Text className="font-semibold text-base">${dish.price}</Text>
                   <TouchableOpacity 

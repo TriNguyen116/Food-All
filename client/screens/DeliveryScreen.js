@@ -11,6 +11,7 @@ import { emptyCart } from '../slices/cartSlice';
 export default function DeliveryScreen() {
     const restaurant = useSelector(selectRestaurant);
     const navigation = useNavigation();
+    //View
     const dispatch = useDispatch();
     const cancelOrder = () => {
         navigation.navigate('Home');

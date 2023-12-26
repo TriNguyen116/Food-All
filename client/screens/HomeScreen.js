@@ -1,5 +1,8 @@
 import { View, Text, TextInput, ScrollView, SafeAreaView } from 'react-native'
-import React from 'react'
+import React, { useLayoutEffect, useState, useEffect } from 'react'
+import { useNavigation } from '@react-navigation/native'
+import { getFeaturedResturants } from '../api';
+
 import { StatusBar } from 'expo-status-bar'
 import * as Icon from 'react-native-feather'
 import { themeColors } from '../theme'
@@ -8,6 +11,17 @@ import { featured } from '../constants'
 import FeaturedRow from '../components/featuredRow'
 
 export default function HomeScreen() {
+
+  const [featuredCategories, setFeaturedCategories] = useState([])
+    const navigation = useNavigation();
+    useLayoutEffect(() => {
+      navigation.setOptions({headerShown: false})
+    }, [])
+    useEffect(()=>{
+        getFeaturedResturants().then(data=>{
+            setFeaturedCategories(data);
+        })
+    },[])
   return (
     <SafeAreaView className="bg-white">
       <StatusBar barStyle="dark-content"/>
@@ -50,6 +64,18 @@ export default function HomeScreen() {
               )
             })
           }
+          {/* {
+            featuredCategories.map((item,index) => {
+              return (
+                <FeaturedRow
+                  key={index}
+                  title={item.name}
+                  restaurants={item.restaurants}
+                  description={item.description}
+                />
+              )
+            })
+          } */}
         </View>
       </ScrollView>
     </SafeAreaView>

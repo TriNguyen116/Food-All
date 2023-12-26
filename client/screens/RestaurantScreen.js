@@ -13,12 +13,16 @@ export default function RestaurantScreen() {
   const {params} = useRoute();
   const navigation = useNavigation();
   let item = params;
+  //View
   const dispatch = useDispatch();
   // console.log('restaurant:',item);
   useEffect(() => {
     if(item && item.id){
       dispatch(setRestaurant({...item}))
     }
+    // if(item && item._id){
+    //   dispatch(setRestaurant({...item}))
+    // }
   }, [])
   return (
     <View>
@@ -26,7 +30,10 @@ export default function RestaurantScreen() {
       <StatusBar style="light"/>
       <ScrollView>
         <View className="relative">
-          <Image className="h-72 w-full" source={item.image}/>
+          <Image className="h-72 w-full" 
+          source={item.image}
+          // source={{uri: urlFor(imgUrl).url()}}
+          />
           {/* nut back */}
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -46,7 +53,11 @@ export default function RestaurantScreen() {
                     <Text className="text-xs">
                       <Text className="text-green-700">{item.stars}</Text>
                       <Text className="text-gray-700">
-                          ({item.reviews} review) <Text className="font-semibold">{item.category}</Text>
+                          ({item.reviews} review) <Text className="font-semibold">
+                            {/* {item.category} */}
+                            {item.category.name}
+
+                            </Text>
                       </Text>
                     </Text>
               </View>
